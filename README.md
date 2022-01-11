@@ -1,5 +1,5 @@
 # lvGen
- Room based level generation with bitmap auto tiling, room type forcing and level fitness checking made for and in Gamemaker. Uses .yy (standard Gamemaker room files).
+ Room based level generation with bitmap auto tiling, room type forcing, weighted room alternatives and level fitness checking made for and in Gamemaker. Uses .yy (standard Gamemaker room files).
 
 ---
 
@@ -11,6 +11,7 @@
 [Adding a prefix](README.md#adding-a-prefix)  
 [Adding a forced room](README.md#adding-a-forced-room)  
 [Adding a level requirement](README.md#adding-a-level-requirement)  
+[Adding a weighted room alternative](README.md#adding-a-weighted-room-alternative)  
 [Change tile size](README.md#change-tile-size)  
 [Troubleshooting](README.md#troubleshooting)  
 
@@ -38,7 +39,14 @@ Add the object to the `global._lvGen_objects` array in `_lvGen_globals`.
 2. After `global._lvGen_roomMap` is cleared `lvGen_room_force` can be called with any predefined prefix.
 
 ## Adding a level requirement
-In `obj_lvGen_control > step event` set fail to true on any requirement check to make the level fail inspection.
+1. When calling `lvGen_level_generate` an array should be added for fitness checks, within which all level requirement checks should be added.
+2. When adding a requirement, it should be added as an array, starting with the function to call to check followed by the appropriate arguments.
+i.e `[[lvGen_instance_exists, obj_lvGen_finish], [lvGen_instance_min, obj_lvGen_powerUp, 1]]`
+
+## Adding a weighted room alternative
+1. When calling `lvGen_level_generate` a weight array should be added, within which all weighted room alternatives should be added.
+2. When adding a weighted alternative, it should be added as an array, starting with the prefix to replace, followed by the prefix to replace it with and then the probability that it should be replaced.
+i.e `[["", "adv", global.score]]` will attempt to replace a basic room with an `adv` room 1/4 of the time if `global.score` is 25.
 
 ## Change tile size
 Edit `#macro lvGen_tile_size` in `lvGen_macros_globals_and_enums`. 
@@ -47,10 +55,17 @@ Edit `#macro lvGen_tile_size` in `lvGen_macros_globals_and_enums`.
 
 ## Troubleshooting
 <details><summary>Branches are terminating with open doorways.</summary>
+ 
 - Make sure that you have copied the rooms to the included files.</details>
 
 <details><summary>Too many straight corridors.</summary>
+ 
 - Room pools requires more corner rooms.</details>
 
 <details><summary>Instances persist between level generation attempts.</summary>
+ 
  - Ensure that the object has beed added to global._lvGen_objects array in _lvGen_globals.</details>
+
+<details><summary>Alternative rooms not being placed acording to probability.</summary>
+ 
+ - Ensure that the pool of replacement rooms has enough variety of shape and size. If a room fails to replace, then whether the room changes to the alternate prefix is calculated again.</details>
