@@ -26,7 +26,7 @@
 6. Copy the rooms folder into the datafiles folder.
 
 ## Adding a new level prop/actor
-Add the object to the `global._lvGen_objects` array in `_lvGen_globals`.
+Add the object to the `global._lvGen_objects` array in `_lvGen_data`.
 
 ## Adding a prefix
 1. In `_lvGen_globals` add the desired prefix.
@@ -72,4 +72,4 @@ Edit `#macro lvGen_tile_size` in `lvGen_macros_globals_and_enums`.
  
  <details><summary>Level gen always fails after first attempt</summary>
  
- - Ensure that all instances to be removed before level generation are included in the `global._lvGen_objects` array in `_lvGen_globals`.
+ - Ensure that all instances to be removed before level generation are included in the `global._lvGen_objects` array in `_lvGen_data`.
