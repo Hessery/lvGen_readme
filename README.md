@@ -69,3 +69,7 @@ Edit `#macro lvGen_tile_size` in `lvGen_macros_globals_and_enums`.
 <details><summary>Alternative rooms not being placed acording to probability.</summary>
  
  - Ensure that the pool of replacement rooms has enough variety of shape and size. If a room fails to replace, then whether the room changes to the alternate prefix is calculated again.</details>
+ 
+ <details><summary>Level gen always fails after first attempt</summary>
+ 
+ - Ensure that all instances to be removed before level generation are included in the `global._lvGen_objects` array in `_lvGen_globals`.
