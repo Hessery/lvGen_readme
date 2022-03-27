@@ -20,7 +20,7 @@
 ## Adding a room
 1. Create a new blank room in gamemaker. 
 2. Add the room to the corresponding group in the IDE.
-3. Add level instance, asset and tile layers and contents.
+3. Add level instances, asset and tile layers and contents.
 4. Add the room by name to the `_lvGen_data` file. You may need to edit one of the `_lvGen_pool_rooms_add_*` functions to place it in the appropriate location.
 5. Update the included files to reflect the changes made by right clicking the room in the Asset Browser and then clicking Open In Explorer.
 6. Copy the rooms folder into the datafiles folder.
